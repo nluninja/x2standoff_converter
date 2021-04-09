@@ -6,11 +6,16 @@ import os
 import re
 import sys
 
-OUTPUT_ENCODING = 'UTF-8'
+ENCODING = 'UTF-8'
 
-CSV = 'csv'
-CONLL = 'conll'
-FORMATS = [CONLL,CSV]
+CSV_FORMAT = 'csv'
+CONLL_FORMAT = 'conll'
+STANDOFF_FORMAT = 'standoff'
+
+FORMATS = [
+            CONLL_FORMAT,
+            CSV_FORMAT
+            ]
 
 def argparser():
     import argparse
@@ -39,6 +44,15 @@ def convert_files(files, options):
             include_docid=options.include_docid
         )
         sys.stdout.write(ann_data)
+
+def txt_for_ann(filename):
+    return os.path.splitext(filename)[0]+'.txt'
+
+def read_conll(filename, options, encoding=ENCODING):
+    txtfilename = txt_for_ann(filename)
+    with codecs.open(txtfilename, 'rU', encoding=encoding) as t_in:
+        with codecs.open(filename, 'rU', encoding=encoding) as a_in:
+            return "ciao"
 
 def main(argv):
     args = argparser().parse_args(argv[1:])
