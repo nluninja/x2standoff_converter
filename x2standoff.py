@@ -12,9 +12,8 @@ CSV_FORMAT = 'csv'
 CONLL_FORMAT = 'conll'
 STANDOFF_FORMAT = 'standoff'
 
-FORMATS = [
-            CONLL_FORMAT,
-            CSV_FORMAT
+FORMATS = [ CSV_FORMAT,
+            CONLL_FORMAT
             ]
 
 def argparser():
@@ -25,7 +24,20 @@ def argparser():
     ap.add_argument('-f', '--format', choices=FORMATS,
                     default=FORMATS[0],
                     help='supported annotation formats')
+    
     ap.add_argument('-o',"--output_dir", type=Path, default=Path(__file__).absolute().parent / "output",
+        help="Path to the data directory",
+    )
+    ap.add_argument('--csv_text_column',  type=Path, default=Path(__file__).absolute().parent / "output",
+        help="Path to the data directory",
+    )
+    ap.add_argument('--csv_category_column', type=Path, default=Path(__file__).absolute().parent / "output",
+        help="Path to the data directory",
+    )
+    ap.add_argument('--csv_skip_headline', type=Path, default=Path(__file__).absolute().parent / "output",
+        help="Path to the data directory",
+    )
+    ap.add_argument('--labels', type=Path, default=Path(__file__).absolute().parent / "output",
         help="Path to the data directory",
     )
     ap.add_argument('data', metavar='DIRS/FILES', nargs='+')
